@@ -1282,7 +1282,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1731648213}
   - component: {fileID: 1731648215}
-  - component: {fileID: 1731648212}
   - component: {fileID: 1731648214}
   m_Layer: 0
   m_Name: GameManager
@@ -1291,22 +1290,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1731648212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1731648211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca12277dac75a67429dc9ae38f66accd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerOneGoal: {fileID: 437300444}
-  playerTwoGoal: {fileID: 1705317533}
-  playerOneScoreText: {fileID: 541225949}
-  playerTwoScoreText: {fileID: 1236583309}
 --- !u!4 &1731648213
 Transform:
   m_ObjectHideFlags: 0
@@ -1423,15 +1406,15 @@ Canvas:
   m_GameObject: {fileID: 1941215813}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0

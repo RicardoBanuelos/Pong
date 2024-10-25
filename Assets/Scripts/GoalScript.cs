@@ -6,6 +6,12 @@ using UnityEngine;
 public class GoalScript : NetworkBehaviour
 {
     public bool isPlayerOneGoal;
+    private GameObject GameManager;
+
+    void Start()
+    {
+        GameManager = GameObject.Find("GameManager");
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,18 +19,18 @@ public class GoalScript : NetworkBehaviour
         {
             return;
         }
-        
+
         if (collision.gameObject.CompareTag("Ball"))
         {
             if (!isPlayerOneGoal)
             {
                 Debug.Log("Player One Scored!");
-                GameObject.Find("GameManager").GetComponent<GameManager>().playerOneScored();
+                GameManager.GetComponent<NetworkController>().PlayerOneScoredServer();
             }
             else
             {
                 Debug.Log("Player Two Scored!");
-                GameObject.Find("GameManager").GetComponent<GameManager>().playerTwoScored();
+                GameManager.GetComponent<NetworkController>().PlayerTwoScoredServer();
             }
         }
     }

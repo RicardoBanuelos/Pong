@@ -12,28 +12,9 @@ public class ControlledPaddle : NetworkBehaviour
     private GameObject mLimitUp;
     private GameObject mLimitDown;
 
-
     public override void OnNetworkSpawn()
     {
-
-    }
-
-    void Start()
-    {
-        if(IsServer)
-        {
-            int clientCount = NetworkManager.Singleton.ConnectedClientsList.Count;
-
-            if(clientCount == 1)
-            {
-                SetStartPositionClientRpc(new Vector3(-8,0,0));
-            }
-            else 
-            {
-                SetStartPositionClientRpc(new Vector3(8,0,0));
-            }
-        }
-        else if(IsOwner)
+        if(IsOwner)
         {
             mLimitUp = GameObject.FindWithTag("TopWall");
             mLimitDown = GameObject.FindWithTag("DownWall");
@@ -41,7 +22,7 @@ public class ControlledPaddle : NetworkBehaviour
         }
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if(!IsOwner)
@@ -72,7 +53,7 @@ public class ControlledPaddle : NetworkBehaviour
 
     
     [ClientRpc]
-    void SetStartPositionClientRpc(Vector3 startPosition)
+    public void SetStartPositionClientRpc(Vector3 startPosition)
     {
         transform.position = startPosition;
     }
