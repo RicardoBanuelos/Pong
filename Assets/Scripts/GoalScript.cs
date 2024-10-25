@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class GoalScript : MonoBehaviour
+public class GoalScript : NetworkBehaviour
 {
     public bool isPlayerOneGoal;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(!IsServer)
+        {
+            return;
+        }
+        
         if (collision.gameObject.CompareTag("Ball"))
         {
             if (!isPlayerOneGoal)
