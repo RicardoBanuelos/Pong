@@ -4,33 +4,28 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ControlledPaddle : NetworkBehaviour
+public class PlayerController : NetworkBehaviour
 {
 
     private Vector3 startPosition;
-    private bool mIsMousePressed;
     private GameObject mLimitUp;
     private GameObject mLimitDown;
+    private bool mIsMousePressed;
+    private int mPlayerId = 1;
+
+
 
     public override void OnNetworkSpawn()
     {
-        if(IsOwner)
-        {
-            mLimitUp = GameObject.FindWithTag("TopWall");
-            mLimitDown = GameObject.FindWithTag("DownWall");
-            startPosition = transform.position;
-        }
+        mLimitUp = GameObject.FindWithTag("TopWall");
+        mLimitDown = GameObject.FindWithTag("DownWall");
+        startPosition = transform.position;
     }
 
 
     void Update()
     {
-        if(!IsOwner)
-        {
-            return;
-        }
-
-        if(mIsMousePressed && IsClient)
+        if(mIsMousePressed)
         {
             Move();
         }
@@ -45,17 +40,14 @@ public class ControlledPaddle : NetworkBehaviour
 
         if(current.y < mLimitUp.transform.position.y && current.y > mLimitDown.transform.position.y)
         {
-            //request servere to update
             transform.position = current;
-
         }
     }
 
-    
     [ClientRpc]
-    public void SetStartPositionClientRpc(Vector3 startPosition)
+    public void SetPositionClientRpc(Vector3 position)
     {
-        transform.position = startPosition;
+        transform.position = position;
     }
 
     public void Reset()
@@ -72,4 +64,6 @@ public class ControlledPaddle : NetworkBehaviour
         mIsMousePressed = false;
         
     }
+
+    public int PlayerId { get => mPlayerId; set => mPlayerId = value; }
 }
